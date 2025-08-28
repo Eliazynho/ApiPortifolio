@@ -1,98 +1,161 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+API do Portfólio Pessoal
+🚀 Sobre o Projeto
+Esta API é o backend responsável por servir os dados para a aplicação Meu Portfólio Pessoal. Ela foi construída para ser uma fonte de dados centralizada, permitindo que o conteúdo dos projetos exibidos no portfólio seja gerenciado de forma dinâmica e desacoplada do frontend.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A aplicação segue os princípios da arquitetura RESTful, fornecendo endpoints claros e previsíveis para a consulta de projetos.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+🛠️ Tecnologias Utilizadas
+Runtime: Node.js
 
-## Description
+Framework: Express.js
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+ORM (Object-Relational Mapping): Prisma
 
-## Project setup
+Banco de Dados: PostgreSQL
 
-```bash
-$ npm install
-```
+Validação de Dados: [Ex: Zod, Joi - se você usar]
 
-## Compile and run the project
+Linguagem: [JavaScript ou TypeScript]
 
-```bash
-# development
-$ npm run start
+✨ Endpoints da API
+A seguir estão os endpoints públicos disponíveis nesta API.
 
-# watch mode
-$ npm run start:dev
+URL Base: [URL_DA_SUA_API_EM_PRODUCAO_AQUI]
 
-# production mode
-$ npm run start:prod
-```
+Projetos (/projects)
+GET /projects
+Retorna uma lista de todos os projetos cadastrados.
 
-## Run tests
+Método: GET
 
-```bash
-# unit tests
-$ npm run test
+Endpoint: /projects
 
-# e2e tests
-$ npm run test:e2e
+Resposta de Sucesso (200 OK):
 
-# test coverage
-$ npm run test:cov
-```
+JSON
 
-## Deployment
+[
+  {
+    "id": 1,
+    "title": "Nome do Projeto 1",
+    "shortDesc": "Uma breve descrição do que o projeto faz.",
+    "imageUrl": "https://example.com/imagem.png",
+    "liveUrl": "https://projeto-online.com",
+    "githubUrl": "https://github.com/usuario/projeto",
+    "challenge": "O desafio principal enfrentado durante o desenvolvimento.",
+    "architecture": "Uma explicação da arquitetura e das soluções técnicas adotadas.",
+    "technologies": ["React", "Next.js", "TypeScript", "MUI"],
+    "createdAt": "2024-08-26T23:00:00.000Z",
+    "updatedAt": "2024-08-27T14:30:00.000Z"
+  },
+  {
+    "id": 2,
+    "title": "Nome do Projeto 2",
+    "shortDesc": "Outra breve descrição.",
+    "imageUrl": null,
+    "liveUrl": null,
+    "githubUrl": "https://github.com/usuario/outro-projeto",
+    "challenge": "O desafio deste segundo projeto.",
+    "architecture": "A solução implementada para o segundo projeto.",
+    "technologies": ["Node.js", "Prisma", "PostgreSQL"],
+    "createdAt": "2024-07-15T10:00:00.000Z",
+    "updatedAt": "2024-07-15T10:00:00.000Z"
+  }
+]
+GET /projects/:id
+Retorna um projeto específico com base no seu id.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Método: GET
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Endpoint: /projects/:id
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+Parâmetros:
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+id (integer, obrigatório): O ID do projeto a ser recuperado.
 
-## Resources
+Resposta de Sucesso (200 OK):
 
-Check out a few resources that may come in handy when working with NestJS:
+JSON
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+{
+  "id": 1,
+  "title": "Nome do Projeto 1",
+  "shortDesc": "Uma breve descrição do que o projeto faz.",
+  "imageUrl": "https://example.com/imagem.png",
+  "liveUrl": "https://projeto-online.com",
+  "githubUrl": "https://github.com/usuario/projeto",
+  "challenge": "O desafio principal enfrentado durante o desenvolvimento.",
+  "architecture": "Uma explicação da arquitetura e das soluções técnicas adotadas.",
+  "technologies": ["React", "Next.js", "TypeScript", "MUI"],
+  "createdAt": "2024-08-26T23:00:00.000Z",
+  "updatedAt": "2024-08-27T14:30:00.000Z"
+}
+Resposta de Erro (404 Not Found):
+Retornado se um projeto com o id especificado não for encontrado.
 
-## Support
+JSON
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+{
+  "error": "Project not found"
+}
+⚙️ Configuração e Execução Local
+Siga os passos abaixo para configurar e rodar a API em sua máquina.
 
-## Stay in touch
+Pré-requisitos
+Node.js (versão 18 ou superior)
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+PostgreSQL rodando localmente ou em um container Docker.
 
-## License
+Git
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Instalação
+Clone o repositório:
+
+Bash
+
+git clone https://github.com/[SEU_USUARIO_GIT]/[NOME_DO_REPOSITORIO_API].git
+Acesse a pasta do projeto:
+
+Bash
+
+cd [NOME_DO_REPOSITORIO_API]
+Instale as dependências:
+
+Bash
+
+npm install
+Configure as Variáveis de Ambiente:
+Crie um arquivo .env na raiz do projeto, baseado no arquivo .env.example. A principal variável a ser configurada é a DATABASE_URL.
+
+Snippet de código
+
+# .env
+DATABASE_URL="postgresql://USUARIO:SENHA@HOST:PORTA/NOME_DO_BANCO?schema=public"
+Aplique as migrações do banco de dados:
+Este comando irá ler o schema.prisma e criar as tabelas no seu banco de dados.
+
+Bash
+
+npx prisma migrate dev
+(Opcional) Popule o banco de dados:
+Para ter dados iniciais para teste, você pode usar o seed do Prisma.
+
+Bash
+
+npx prisma db seed
+Execução
+Para desenvolvimento (com hot-reload):
+
+Bash
+
+npm run dev
+Para produção:
+
+Bash
+
+npm run build
+npm start
+A API estará disponível em http://localhost:3001 (ou na porta que você definir).
+
+📄 Licença
+Este projeto está sob a licença MIT.
