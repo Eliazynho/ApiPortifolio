@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ==========================================
+// MODELO DE DADOS PARA SEUS PROJETOS
+// ==========================================
+model Project {
+  // --- Campos de Identificação ---
+  id        Int      @id @default(autoincrement())
+  title     String   @unique // Título principal do projeto. Ex: "Dev-Dash Real-time"
+  shortDesc String   // Uma frase de impacto que descreve o projeto.
+
+  // --- Mídia e Links ---
+  imageUrl  String?  // URL para a imagem ou thumbnail do vídeo de demonstração.
+  liveUrl   String?  // Link para o projeto no ar (deploy).
+  githubUrl String?  // Link para o repositório no GitHub.
+
+  // --- Conteúdo Detalhado (para o painel do projeto) ---
+  challenge    String   @db.Text // Parágrafo descrevendo o problema ou desafio.
+  architecture String   @db.Text // Parágrafo explicando as escolhas técnicas e arquitetura.
+  technologies String[] // Array com a stack. Ex: ["Next.js", "NestJS", "MUI", "Prisma"]
+
+  // --- Campos de Controle ---
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
