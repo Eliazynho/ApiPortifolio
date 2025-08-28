@@ -1,0 +1,35 @@
+# Arquivo de configuração para deploy na plataforma Render.com
+# Este arquivo define dois serviços: um banco de dados PostgreSQL e uma API web.
+
+services:
+  # ----------------- Serviço do Banco de Dados -----------------
+  - type: psql        # psql indica um serviço de banco de dados PostgreSQL
+    name: portfolio-database # Nome do seu banco de dados no Render
+    databaseName: portfolio_db # Nome da base de dados interna
+    user: portfolio_user     # Nome do usuário para acessar o banco
+    plan: free        # Plano gratuito. Mude para "starter" ou outro para produção.
+    region: oregon    # Região do servidor. Escolha a mais próxima dos seus usuários.
+
+  # ------------------- Serviço da API Web -------------------
+  - type: web         # web indica um serviço que recebe tráfego HTTP
+    name: portfolio-api # Nome da sua API no Render
+    runtime: node     # Ambiente de execução
+    plan: free        # Plano gratuito. O serviço "dorme" após inatividade.
+    region: oregon    # É importante manter na mesma região do banco para baixa latência.
+    
+    # Comandos que o Render executa para preparar sua aplicação
+    buildCommand: "npm install && npx prisma generate && npx prisma migrate deploy"
+    
+    # Comando para iniciar o servidor após o build
+    startCommand: "npm start"
+    
+    # Variáveis de ambiente para a sua API
+    envVars:
+      - key: DATABASE_URL
+        fromService: # Pega o valor de outro serviço automaticamente
+          type: psql
+          name: portfolio-database # Nome do serviço de banco de dados definido acima
+          property: connectionString # Render fornece a string de conexão completa e segura
+
+      - key: NODE_ENV
+        value: production
